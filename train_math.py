@@ -213,12 +213,13 @@ class SupervisedDataset(Dataset):
         #    prompt_input.format_map(example) if example.get("input", "") != "" else prompt_no_input.format_map(example)
         #    for example in list_data_dict
         #]
+        sources = []
         for example in list_data_dict:
             idx = random.randint(len(PROMPT_DICT["prompt_no_input"]))
-            if example.get("input", "") != "":
-                prompt_input.format_map(example)
+            if example.get("input", "") != "":                
+                sources.append(prompt_input.format_map(example))
             else:
-                prompt_no_input[idx].format_map(example)
+                sources.append( prompt_no_input[idx].format_map(example))               
             
         targets = [f"{example['output']}{tokenizer.eos_token}" for example in list_data_dict]
 
