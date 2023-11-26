@@ -215,7 +215,7 @@ class SupervisedDataset(Dataset):
         #]
         sources = []
         for example in list_data_dict:
-            idx = random.randint(len(PROMPT_DICT["prompt_no_input"]))
+            idx = random.randint(0,len(PROMPT_DICT["prompt_no_input"])-1)
             if example.get("input", "") != "":                
                 sources.append(prompt_input.format_map(example))
             else:
