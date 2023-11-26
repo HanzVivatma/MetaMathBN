@@ -14,6 +14,7 @@
 #    Modified by Zheng Yuan and Hongyi Yuan
 
 import os
+import random
 import copy
 import logging
 from dataclasses import dataclass, field
@@ -208,10 +209,17 @@ class SupervisedDataset(Dataset):
                 return '\n'.join(query.split('\n')[1:])
             list_data_dict = [{'instruction':data['query'].split('\n')[0], 'input':get_input(data['query']), 'output':data['response']} for data in list_data_dict]
         # import ipdb; ipdb.set_trace()
-        sources = [
-            prompt_input.format_map(example) if example.get("input", "") != "" else prompt_no_input.format_map(example)
-            for example in list_data_dict
-        ]
+        #sources = [
+        #    prompt_input.format_map(example) if example.get("input", "") != "" else prompt_no_input.format_map(example)
+        #    for example in list_data_dict
+        #]
+        for example in list_data_dict:
+            idx = random.randint(len(PROMPT_DICT["prompt_no_input"]))
+            if example.get("input", "") != "":
+                prompt_input.format_map(example)
+            else:
+                prompt_no_input[idx].format_map(example)
+            
         targets = [f"{example['output']}{tokenizer.eos_token}" for example in list_data_dict]
 
         self.sources = sources
