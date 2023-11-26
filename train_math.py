@@ -52,15 +52,36 @@ PROMPT_DICT = {
         "Write a response that appropriately completes the request.\n\n"
         "### Instruction:\n{instruction}\n\n### Input:\n{input}\n\n### Response:"
     ),
-    "prompt_no_input": (
-        # "Below is a multiple choices math question which have 4 posible choices which only one is the correct answer."
-        # "Write a response that appropriately completes the request.\n\n"
+    "prompt_no_input": [
+        (
         "Answer the following question by reasoning step-by-step."
-        # "Question: \n{instruction}\n\n Answer:"
-        # "Below is an instruction that describes a task. "
-        # "Write a response that appropriately completes the request.\n\n"
-        "### Q:\n{instruction}\n\n### A: "
-    ),
+        "### Question:\n{instruction}\n\n### Answer: "
+        ),
+        (
+        "Answer the following question through careful, concise step-by-step reasoning."
+        "### Question:\n{instruction}\n\n### Answer: "
+        ),
+        (
+        "Let's use the following strategy to be sure we have the right answer:\n(1) First, let's write down a step-by-step procedure of how to come to the right answer.\n(2) Second, let's go through each of those steps."
+        "### Question:\n{instruction}\n\n### Answer: "
+        ),
+        (
+        "Answer the following question through careful, concise step-by-step reasoning. First, complement the question with helpful knowledge and important additional facts. Second, generate sub-questions that are required to answer the original question, answer them until you can answer the original question."
+        "### Question:\n{instruction}\n\n### Answer: "
+        ),
+        #(
+        #"Create a dialog between a professor and a student. The student asks sub-questions to the question. The professor works them out in a step by step way and makes sure that the student understood how they got to the right answer."
+        #"### Question:\n{instruction}\n\n### Answer: "
+        #),
+        (
+        "Let's answer the question using two different approaches independent from each other:\n(1) First, let's answer the question directly without reasoning.\n(2) Second, let's work this out in a step by step way to be sure we have the right answer."
+        "### Question:\n{instruction}\n\n### Answer: "
+        ),
+        (
+        "Answer: Let's work this out in a step by step way to be sure we have the right answer."
+        "### Question:\n{instruction}\n\n### Answer: "
+        ),
+    ],
 }
 #### 28
 @dataclass
